@@ -15,20 +15,23 @@ public class Mandelbrot {
 	// drawing colour
 	private Color colour = Color.white;
 	private Color[] palette;
-	
 	private int paletteSize = 10;
 	
+	// drawing area
 	private MyDrawPanel drawPanel;
-	
 	BufferedImage img;
 	
+	// ??
 	static int n = 2;
-	
+
+	/**
+	* Program starting point.
+	*/
 	public static void main(String [] args) {
-	
 		if (args.length > 0) {
 			n = Integer.parseInt(args[0]);
 		}
+
 		Mandelbrot mandel = new Mandelbrot();
 		mandel.go();
 	}
@@ -60,14 +63,6 @@ public class Mandelbrot {
 			}
 		}
 	}
-	
-	double x0;
-	double y0;
-	double x;
-	double y;
-	int iteration;
-	int maxIteration = 1000;
-	double[] ans = new double[3];
 
 
 	/**
@@ -80,17 +75,18 @@ public class Mandelbrot {
 	*/
 	public void escapeTime(int pX, int pY) {
 	
-		x0 = scale(pX, 0, fWidth - 1, -2.5, 1);
-		y0 = scale(pY, 0, fHeight - 1, -1, 1);
+		double x0 = scale(pX, 0, fWidth - 1, -2.5, 1);
+		double y0 = scale(pY, 0, fHeight - 1, -1, 1);
 		
-		x = 0;
-		y = 0;
+		double x = 0;
+		double y = 0;
 		
-		iteration = 0;
-		
+		int iteration = 0;
+		int maxIteration = 1000;
+
 		double xTemp = 0;
 		
-		while ((x*x + y*y < 2*2 && (iteration < maxIteration)) {
+		while ((x*x + y*y) < 2*2 && (iteration < maxIteration)) {
 		
 			if (n == 2) {
 				xTemp = x*x - y*y + x0;
